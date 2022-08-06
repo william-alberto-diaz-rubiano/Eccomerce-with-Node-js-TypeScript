@@ -1,17 +1,22 @@
 import { Request, Response } from "express";
+import { HttpResponse } from "../../shared/response/http.response";
 import { ProductService } from "../services/pruduct.service";
 
 
 export class ProductController{
 
-    constructor(private readonly productService: ProductService = new ProductService()){} 
+    constructor(private readonly productService: ProductService = new ProductService(),
+    private readonly httpResponse: HttpResponse = new HttpResponse){} 
 
     async getProducts(req: Request, res: Response){
         try {
             const data = await this.productService.findAllProducts();
-            return res.status(200).json(data);
+            if(data.length === 0){
+                return this.httpResponse.NotFound(res, "Products not found");
+            }
+            return this.httpResponse.Ok(res, data);
         } catch (error) {
-            console.log(error);
+            return this.httpResponse.Error(res, error);
         }
     }
 
@@ -19,18 +24,21 @@ export class ProductController{
         const {id} = req.params;
         try {
             const data = await this.productService.findProductById(id);
-            return res.status(200).json(data);
+            if(data == null){
+                return this.httpResponse.NotFound(res, "Product not found");
+            }
+            return this.httpResponse.Ok(res, data);
         } catch (error) {
-            console.log(error);
+            return this.httpResponse.Error(res, error);
         }
     }
 
     async createProduct(req: Request, res: Response){
         try {
             const data = await this.productService.creteProduct(req.body);
-            res.status(201).json(data);
+            return this.httpResponse.Created(res, data);
         } catch (error) {
-            console.log(error);
+            return this.httpResponse.Error(res, error);
         }
     }
 
@@ -38,9 +46,12 @@ export class ProductController{
         const {id} = req.params;
         try {
             const data = await this.productService.deleteProduct(id);
-            res.status(200).json(data);
+            if(!data.affected){
+                return this.httpResponse.NotFound(res, "Product not found");
+            }
+            return this.httpResponse.Ok(res, data);
         } catch (error) {
-            console.log(error);
+            return this.httpResponse.Error(res, error);
         }
     }
 
@@ -48,9 +59,12 @@ export class ProductController{
         const {id} = req.params;
         try {
             const data = await this.productService.updateProduct(id, req.body);
-            res.status(200).json(data);
+            if(!data.affected){
+                return this.httpResponse.NotFound(res, "Product not found");
+            }
+            return this.httpResponse.Ok(res, data);
         } catch (error) {
-            console.log(error);
+            return this.httpResponse.Error(res, error);
         }
     }
 

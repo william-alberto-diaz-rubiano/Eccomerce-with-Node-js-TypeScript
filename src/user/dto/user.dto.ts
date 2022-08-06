@@ -1,5 +1,6 @@
 import { IsNotEmpty, IsString } from "class-validator";
 import { BaseDto } from "../../config/base.dto";
+import { CustomerEntity } from "../../customer/entities/customer.entity";
 
 export class UserDto extends BaseDto{
 
@@ -31,4 +32,13 @@ export class UserDto extends BaseDto{
     @IsNotEmpty()
     state!: string;
 
+    @IsNotEmpty()
+    role!: RoleType;
+
+}
+
+export enum RoleType {
+    USER = "USER",
+    CUSTOMER = "CUSTOMER",
+    ADMIN = "ADMIN",
 }

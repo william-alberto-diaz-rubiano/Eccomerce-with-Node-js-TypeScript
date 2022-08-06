@@ -14,6 +14,13 @@ export class CategoryService extends BaseService<CategoryEntity> {
         return (await this.exeRepository).find();
     }
 
+    async findAllCateroriesWithProducts(id: string): Promise<CategoryEntity[]>{
+      return (await this.exeRepository)
+      .createQueryBuilder('category')
+      .innerJoinAndSelect('category.products', 'products')
+      .where({id}).getMany();
+  }
+
     async findCategoryById(id: string): Promise<CategoryEntity | null> {
         return (await this.exeRepository).findOneBy({ id });
       }
@@ -28,4 +35,6 @@ export class CategoryService extends BaseService<CategoryEntity> {
       async updateCategory(id: string, infoUpdate: CategoryDto): Promise<UpdateResult> {
         return (await this.exeRepository).update(id, infoUpdate);
       }
+
+
 }

@@ -16,9 +16,8 @@ export class PurchaseController {
           return this.httpResponse.NotFound(res, "Purchases not found");
         }
         return this.httpResponse.Ok(res, data);
-      } catch (e) {
-        console.error(e);
-        return this.httpResponse.Error(res, e);
+      } catch (error) {
+        return this.httpResponse.Error(res, error);
       }
     }
 
@@ -30,19 +29,17 @@ export class PurchaseController {
           return this.httpResponse.NotFound(res, "Purchase not found");
         }
         return this.httpResponse.Ok(res, data);
-      } catch (e) {
-        console.error(e);
-        return this.httpResponse.Error(res, e);
+      } catch (error) {
+        return this.httpResponse.Error(res, error);
       }
     }
 
     async createPurchase(req: Request, res: Response) {
       try {
         const data = await this.purchaseService.createPurchase(req.body);
-        return this.httpResponse.Ok(res, data);
-      } catch (e) {
-        console.error(e);
-        return this.httpResponse.Error(res, e);
+        return this.httpResponse.Created(res, data);
+      } catch (error) {
+        return this.httpResponse.Error(res, error);
       }
     }
 
@@ -58,9 +55,8 @@ export class PurchaseController {
         }
   
         return this.httpResponse.Ok(res, data);
-      } catch (e) {
-        console.error(e);
-        return this.httpResponse.Error(res, e);
+      } catch (error) {
+        return this.httpResponse.Error(res, error);
       }
     }
 
@@ -73,9 +69,8 @@ export class PurchaseController {
         }
   
         return this.httpResponse.Ok(res, data);
-      } catch (e) {
-        console.error(e);
-        return this.httpResponse.Error(res, e);
+      } catch (error) {
+        return this.httpResponse.Error(res, error);
       }
     }
     

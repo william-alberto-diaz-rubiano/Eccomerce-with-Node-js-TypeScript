@@ -17,9 +17,8 @@ export class PurchaseProductController {
           return this.httpResponse.NotFound(res, "Data not found");
         }
         return this.httpResponse.Ok(res, data);
-      } catch (e) {
-        console.error(e);
-        return this.httpResponse.Error(res, e);
+      } catch (error) {
+        return this.httpResponse.Error(res, error);
       }
     }
 
@@ -33,9 +32,8 @@ export class PurchaseProductController {
           return this.httpResponse.NotFound(res, "Data not found");
         }
         return this.httpResponse.Ok(res, data);
-      } catch (e) {
-        console.error(e);
-        return this.httpResponse.Error(res, e);
+      } catch (error) {
+        return this.httpResponse.Error(res, error);
       }
     }
 
@@ -44,10 +42,9 @@ export class PurchaseProductController {
         const data = await this.purchaseProductService.createPurchaseProduct(
           req.body
         );
-        return this.httpResponse.Ok(res, data);
-      } catch (e) {
-        console.error(e);
-        return this.httpResponse.Error(res, e);
+        return this.httpResponse.Created(res, data);
+      } catch (error) {
+        return this.httpResponse.Error(res, error);
       }
     }
 
@@ -62,9 +59,8 @@ export class PurchaseProductController {
         }
   
         return this.httpResponse.Ok(res, data);
-      } catch (e) {
-        console.error(e);
-        return this.httpResponse.Error(res, e);
+      } catch (error) {
+        return this.httpResponse.Error(res, error);
       }
     }
 
@@ -78,9 +74,8 @@ export class PurchaseProductController {
         }
   
         return this.httpResponse.Ok(res, data);
-      } catch (e) {
-        console.error(e);
-        return this.httpResponse.Error(res, e);
+      } catch (error) {
+        return this.httpResponse.Error(res, error);
       }
     }
 

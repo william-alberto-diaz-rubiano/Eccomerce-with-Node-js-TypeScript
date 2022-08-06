@@ -27,4 +27,13 @@ export class UserService extends BaseService<UserEntity> {
       async updateUser(id: string, infoUpdate: UserDto): Promise<UpdateResult> {
         return (await this.exeRepository).update(id, infoUpdate);
       }
+
+      async findUserWithRelation(id: string): Promise<UserEntity | null> {
+        return (await this.exeRepository)
+        .createQueryBuilder('user')
+        .leftJoinAndSelect('user.customer','customer')
+        .where({id})
+        .getOne();
+      }
+
 }
