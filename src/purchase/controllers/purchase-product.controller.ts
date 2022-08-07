@@ -79,4 +79,17 @@ export class PurchaseProductController {
       }
     }
 
+    async getPurchaseProductWithExtraInfo(req: Request, res: Response) {
+      const { id } = req.params;
+      try {
+        const data = await this.purchaseProductService.findPurchaseProductWithExtraInfo(id);
+        if (!data) {
+          return this.httpResponse.NotFound(res, "Data not found");
+        }
+        return this.httpResponse.Ok(res, data);
+      } catch (error) {
+        return this.httpResponse.Error(res, error);
+      }
+    }
+
   }

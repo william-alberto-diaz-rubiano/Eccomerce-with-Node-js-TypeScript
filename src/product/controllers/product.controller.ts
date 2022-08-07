@@ -68,5 +68,17 @@ export class ProductController{
         }
     }
 
+    async getProductWithCategory(req: Request, res: Response){
+        const {id} = req.params;
+        try {
+            const data = await this.productService.findProductWithCategory(id);
+            if(data == null){
+                return this.httpResponse.NotFound(res, "Product not found");
+            }
+            return this.httpResponse.Ok(res, data);
+        } catch (error) {
+            return this.httpResponse.Error(res, error);
+        }
+    }
 
 }

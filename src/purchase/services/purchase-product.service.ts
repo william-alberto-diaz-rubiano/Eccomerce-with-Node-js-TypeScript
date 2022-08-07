@@ -33,4 +33,12 @@ export class PurchaseProductService extends BaseService<PurchaseProductEntity> {
       return (await this.exeRepository).update(id, infoUpdate);
     }
 
+    async findPurchaseProductWithExtraInfo(id: string): Promise<PurchaseProductEntity | null> {
+      return (await this.exeRepository).createQueryBuilder('purchases_products')
+      .leftJoinAndSelect('purchases_products.product', 'product')
+      .leftJoinAndSelect('purchases_products.purchase', 'purchase')
+      .where({id})
+      .getOne();
+    }
+
   }
