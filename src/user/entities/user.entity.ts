@@ -11,10 +11,10 @@ export class UserEntity extends BaseEntity{
     name!: string;
   
     @Column()
-    lastname!: string;
+    lastName!: string;
   
     @Column()
-    username!: string;
+    userName!: string;
   
     @Column()
     email!: string;

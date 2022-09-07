@@ -10,11 +10,11 @@ export class UserDto extends BaseDto{
   
     @IsString()
     @IsNotEmpty()
-    lastname!: string;
+    lastName!: string;
   
     @IsString()
     @IsNotEmpty()
-    username!: string;
+    userName!: string;
   
     @IsString()
     @IsNotEmpty()

@@ -5,7 +5,7 @@ import { CustomerDto } from "../dto/customer.dto";
 
 export class CustomerMiddleware {
 
-    constructor(private httpResponse: HttpResponse = new HttpResponse()) {}
+    constructor(private readonly httpResponse: HttpResponse = new HttpResponse()) {}
 
     customerValidator(req: Request, res: Response, next: NextFunction){
         const {address,

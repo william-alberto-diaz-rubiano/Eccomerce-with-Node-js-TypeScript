@@ -5,7 +5,7 @@ import { PurchaseDTO } from "../dto/purchase.dto";
 
 export class PurchaseMiddleware {
 
-    constructor(private httpResponse: HttpResponse = new HttpResponse()){
+    constructor(private readonly httpResponse: HttpResponse = new HttpResponse()){
         
     }
 

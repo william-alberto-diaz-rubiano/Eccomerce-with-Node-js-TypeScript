@@ -22,8 +22,8 @@ export class UserMiddleware{
         const valid = new UserDto();
 
         valid.name = name;
-        valid.lastname = lastname;
-        valid.username = username;
+        valid.lastName = lastname;
+        valid.userName = username;
         valid.email = email;
         valid.password = password;
         valid.city = city;
