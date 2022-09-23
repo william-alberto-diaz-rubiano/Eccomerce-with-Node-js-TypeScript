@@ -1,17 +1,20 @@
 import { validate } from "class-validator";
 import { NextFunction, Request, Response } from "express";
+import { SharedMiddleware } from "../../shared/middlewares/shared.middleware";
 import { HttpResponse } from "../../shared/response/http.response";
 import { UserDto } from "../dto/user.dto";
 
-export class UserMiddleware{
+export class UserMiddleware extends SharedMiddleware{
 
-    constructor(private readonly httpResponse: HttpResponse = new HttpResponse()){}
+    constructor(){
+        super();
+    }
     
     userValidator(req: Request, res: Response, next: NextFunction ){
         const {
             name,
-            lastname,
-            username,
+            lastName,
+            userName,
             email,
             password,
             city,
@@ -22,8 +25,8 @@ export class UserMiddleware{
         const valid = new UserDto();
 
         valid.name = name;
-        valid.lastName = lastname;
-        valid.userName = username;
+        valid.lastName = lastName;
+        valid.userName = userName;
         valid.email = email;
         valid.password = password;
         valid.city = city;
