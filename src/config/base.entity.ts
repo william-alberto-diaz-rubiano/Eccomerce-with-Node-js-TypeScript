@@ -5,6 +5,7 @@ export class BaseEntity{
     @PrimaryGeneratedColumn("uuid")
     id!: string;
 
+
     @CreateDateColumn(
         {
             name: "created_at",

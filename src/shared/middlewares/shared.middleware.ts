@@ -10,6 +10,17 @@ export class SharedMiddleware {
     return passport.authenticate(type, { session: false });
   }
 
+  checkUserRole(req: Request, res: Response, next: NextFunction) {
+    const user = req.user as UserEntity;
+    const {id} = req.params;
+    console.log(user.id)
+    console.log(id)
+    if (user.role !== RoleType.USER || user.id !== id) {
+      return this.httpResponse.Unauthorized(res, "No tienes permiso");
+    }
+    return next();
+  }
+
   checkCustomerRole(req: Request, res: Response, next: NextFunction) {
     const user = req.user as UserEntity;
     if (user.role !== RoleType.CUSTOMER) {
@@ -17,6 +28,7 @@ export class SharedMiddleware {
     }
     return next();
   }
+
   checkAdminRole(req: Request, res: Response, next: NextFunction) {
     const user = req.user as UserEntity;
     if (user.role !== RoleType.ADMIN) {
